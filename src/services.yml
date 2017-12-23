@@ -1,0 +1,55 @@
+services:
+    validator:
+        class: c3037\Otus\FirstWeek\Library\Validator
+        arguments:
+            - '@ignored_char_container'
+            - '@validation_pair_container'
+            - '@opened_symbol_stack_factory'
+
+    ignored_char_container:
+        class: c3037\Otus\FirstWeek\Library\IgnoredChar\IgnoredCharContainer
+        calls:
+            -
+              - 'add'
+              -
+                - '@space_char'
+                - '@new_line_char'
+                - '@carriage_return_char'
+                - '@tabulation_char'
+
+    space_char:
+        class: c3037\Otus\FirstWeek\Library\IgnoredChar\IgnoredChar
+        arguments:
+            - ' '
+
+    new_line_char:
+        class: c3037\Otus\FirstWeek\Library\IgnoredChar\IgnoredChar
+        arguments:
+            - "\n"
+
+    carriage_return_char:
+        class: c3037\Otus\FirstWeek\Library\IgnoredChar\IgnoredChar
+        arguments:
+            - "\r"
+
+    tabulation_char:
+        class: c3037\Otus\FirstWeek\Library\IgnoredChar\IgnoredChar
+        arguments:
+            - "\t"
+
+    validation_pair_container:
+        class: c3037\Otus\FirstWeek\Library\ValidationPair\ValidationPairContainer
+        calls:
+            -
+              - 'add'
+              -
+                - '@round_brackets'
+
+    round_brackets:
+        class: c3037\Otus\FirstWeek\Library\ValidationPair\ValidationPair
+        arguments:
+            - '('
+            - ')'
+
+    opened_symbol_stack_factory:
+        class: c3037\Otus\FirstWeek\Library\OpenedSymbols\OpenedSymbolStackFactory
