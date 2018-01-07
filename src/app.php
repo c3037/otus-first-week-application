@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use c3037\Otus\FirstWeek\Library\Validator;
+use c3037\Otus\FirstWeek\Library\ValidatorInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -56,7 +56,7 @@ function validateString(string $validatableString): bool
 {
     try {
         $validator = buildDIContainer()->get('validator');
-        /** @var Validator $validator */
+        /** @var ValidatorInterface $validator */
 
         return $validator->validate($validatableString);
     } catch (InvalidArgumentException $ex) {
